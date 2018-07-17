@@ -7,7 +7,6 @@ class PhoneNumberPreCompleteOneSubscriber extends EventSubscriber[PhoneNumberSta
   override def receive(publisher: EventPublisher[PhoneNumberState], event: PhoneNumberState): Future[Unit] = event match {
     case PhoneNumberState.Processed =>
       publisher.publish(PhoneNumberState.PreCompleted1)
-      Future.Unit
     case _ =>
       Future.Unit
   }

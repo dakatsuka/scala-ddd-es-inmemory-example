@@ -8,7 +8,6 @@ class PhoneNumberProcessSubscriber extends EventSubscriber[PhoneNumberState] {
     case PhoneNumberState.Initial =>
       PhoneNumberDB.state = PhoneNumberState.Processed
       publisher.publish(PhoneNumberState.Processed)
-      Future.Unit
     case _ =>
       Future.Unit
   }

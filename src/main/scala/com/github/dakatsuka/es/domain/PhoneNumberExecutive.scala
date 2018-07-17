@@ -23,6 +23,5 @@ class PhoneNumberExecutive(
 
   override protected def preComplete(): Future[Unit] = {
     publish(PhoneNumberState.Completed)
-    Future.Unit
   }
 }
