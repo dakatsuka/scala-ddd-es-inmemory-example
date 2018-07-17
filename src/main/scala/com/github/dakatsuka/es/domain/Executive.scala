@@ -1,9 +1,9 @@
 package com.github.dakatsuka.es.domain
 
-import com.github.dakatsuka.es.lib.event.EventPublisher
+import com.github.dakatsuka.es.lib.event.{EventHandler, EventPublisher}
 import com.twitter.util.Future
 
-trait Executive[Ev] extends EventPublisher[Ev] {
+trait Executive[Ev] extends EventPublisher[Ev] with EventHandler[Ev] {
   protected def tracker: Tracker
 
   protected def preComplete(): Future[Unit] = Future.Unit

@@ -14,14 +14,15 @@ class PhoneNumberExecutive(
     case PhoneNumberState.PreCompleted2 =>
       tracker.addState(event)
       Future.Unit
-    case PhoneNumberState.Completed =>
+    case PhoneNumberState.Completed(message) =>
       PhoneNumberDB.state = event
+      PhoneNumberDB.message = message
       Future.Unit
     case _ =>
       Future.Unit
   }
 
   override protected def preComplete(): Future[Unit] = {
-    publish(PhoneNumberState.Completed)
+    publish(PhoneNumberState.Completed("Hello!"))
   }
 }

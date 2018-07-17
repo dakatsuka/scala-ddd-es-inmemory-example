@@ -12,6 +12,7 @@ object Main extends App {
       _ <- useCase.run()
     } yield {
       println(PhoneNumberDB.state)
+      println(PhoneNumberDB.message)
     }
   }
 }

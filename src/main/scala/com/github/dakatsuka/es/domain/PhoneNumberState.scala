@@ -7,5 +7,5 @@ object PhoneNumberState {
   case object Processed extends PhoneNumberState
   case object PreCompleted1 extends PhoneNumberState
   case object PreCompleted2 extends PhoneNumberState
-  case object Completed extends PhoneNumberState
+  case class Completed(message: String) extends PhoneNumberState
 }

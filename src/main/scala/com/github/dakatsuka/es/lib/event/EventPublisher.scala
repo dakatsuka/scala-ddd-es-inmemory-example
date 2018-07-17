@@ -19,16 +19,4 @@ trait EventPublisher[Ev] {
   }
 
   def publish(event: Ev): Future[Unit] = queue.enqueue(event)
-
-  def polling(): Future[Unit] = {
-    handle().flatMap {
-      case Some(_) => polling()
-      case None    => Future.Unit
-    }
-  }
-
-  private def handle(): Future[Option[Unit]] = queue.dequeue().flatMap {
-    case Some(event) => Future.collect(subscribers.map(_.receive(self, event)).toSeq).map(_ => Some())
-    case None        => Future.None
-  }
 }
