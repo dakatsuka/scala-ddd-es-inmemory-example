@@ -8,7 +8,9 @@ class PhoneNumberUseCase {
     val executiveFactory = new PhoneNumberExecutiveFactory
     val executive = executiveFactory.factory()
 
-    executive.publish(PhoneNumberState.Initial)
-    executive.run()
+    for {
+       _ <- executive.publish(PhoneNumberState.Initial)
+       _ <- executive.run()
+    } yield ()
   }
 }
