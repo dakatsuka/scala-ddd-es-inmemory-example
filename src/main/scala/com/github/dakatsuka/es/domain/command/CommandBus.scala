@@ -1,5 +1,6 @@
 package com.github.dakatsuka.es.domain.command
 
+import com.github.dakatsuka.es.domain.event.DomainEventBus
 import com.twitter.util.Future
 
 import scala.reflect.runtime.{universe => ru}
@@ -25,7 +26,7 @@ class CommandBus {
   /**
    * コマンドを受け取ってコマンドハンドラーに処理を移譲するメソッド（ユースケースなどアプリケーション層がコマンドを投げてくる想定）
    */
-  def send[CMD <: Command : TypeTag](command: CMD): Future[Unit] = {
+  def send[CMD <: Command : TypeTag](command: CMD)(implicit bus: DomainEventBus): Future[Unit] = {
     val typeKey = typeOf[CMD]
 
     val handlerOpt = handlers.get(typeKey).map(_.asInstanceOf[CommandHandler[CMD]])
